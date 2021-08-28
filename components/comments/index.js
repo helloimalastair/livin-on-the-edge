@@ -53,7 +53,7 @@
 // };
 
 const Comments = () => {
-  return (<></>);
+	return <></>;
 };
 
 export default Comments;
