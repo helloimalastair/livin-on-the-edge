@@ -4,6 +4,10 @@ auto_deploy: false
 admin_path: "/public/admin"
 webhook_url: 
 sections:
+- type: document
+  path: data/projectsData.js
+  label: Projects
+  match: "**/*"
 - type: directory
   path: data/authors
   label: Authors
