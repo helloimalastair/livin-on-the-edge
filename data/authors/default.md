@@ -4,8 +4,6 @@ avatar: "/static/images/avatar.png"
 occupation: Independent Developer
 company: Alastair Technologies
 email: hellothere@goalastair.com
-twitter: ''
-linkedin: ''
 github: https://github.com/helloimalastair
 
 ---
