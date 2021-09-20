@@ -1,11 +1,14 @@
 ---
 title: Building a Blog
-date: '2021-09-17'
-tags: ['cloudflare', 'pages']
+date: 2021-09-17
+tags:
+- cloudflare
+- pages
 draft: false
-summary: Our Hero, Alastair, completely clueless in how to internet, decides to write a blog.
----
+summary: Our Hero, Alastair, completely clueless in how to internet, decides to write
+  a blog.
 
+---
 So yeah, I have a blog now. It took me a long time to get it up and running, and honestly, I'm not sure how I feel about it.
 
 Should I be happy with myself about the fact that I have an actual, functional blog now? Should I curl up in a corner and cry at how long it took to get to this point? I don't know.
@@ -20,6 +23,10 @@ I started with a fantastic template from Github, written by the fabulous [Timoth
 
 After I came back, realizing I should probably do something about it, I connected it to [Forestry's](https://forestry.io) Git-Based Content Management System, which I have some experience with. Once I thought I had everything ready, I deployed it to [Cloudflare Pages](https://pages.cloudflare.com), so that I didn't need to manage hosting or bandwidth. And that's about it.
 
-I haven't set the Github repo to public. That isn't because I don't believe in Open Source, which I do. It is more just that I'm embarrased about how messy I made it.
+I haven't set the Github repository to public. That isn't because I don't believe in Open Source, which I do. It is more just that I'm embarrassed about how messy I made it.
+
+## You've inspired me to build my own blog!
+
+I'm flattered, I really am! For resources on how to build your own blog, try my new [Blog Helper](https://www.goalastair.com/buildyourownblog), or send me a ping if you still need help.
 
 See y'all around!
