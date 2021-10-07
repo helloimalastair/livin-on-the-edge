@@ -29,4 +29,4 @@ I haven't set the Github repository to public. That isn't because I don't believ
 
 I'm flattered, I really am! For resources on how to build your own blog, try my new [Blog Helper](https://www.goalastair.com/buildyourownblog), or send me a ping if you still need help.
 
-See y'all around!
+Live Long and Prosper, and see y'all around!
