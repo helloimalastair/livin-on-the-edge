@@ -17,3 +17,5 @@ fields:
 - type: text
   name: summary
   label: summary
+pages:
+- data/blog/working-on-an-update.md
