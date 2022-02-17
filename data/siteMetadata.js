@@ -11,10 +11,10 @@ const siteMetadata = {
   socialBanner: '/static/images/twitter-card.png',
   email: 'hellothere@goalastair.com',
   github: 'https://github.com/helloimalastair',
-  twitter: 'https://twitter.com/Twitter',
-  facebook: 'https://facebook.com',
-  youtube: 'https://youtube.com',
-  linkedin: 'https://www.linkedin.com',
+  twitter: 'https://twitter.com/helloimalastair',
+  facebook: '',
+  youtube: '',
+  linkedin: '',
   locale: 'en-US',
   analytics: {
     // supports plausible, simpleAnalytics or googleAnalytics
