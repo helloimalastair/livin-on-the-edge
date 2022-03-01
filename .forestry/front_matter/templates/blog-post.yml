@@ -18,4 +18,6 @@ fields:
   name: summary
   label: summary
 pages:
+- data/blog/buildingablog.md
 - data/blog/working-on-an-update.md
+- data/blog/statusmap
