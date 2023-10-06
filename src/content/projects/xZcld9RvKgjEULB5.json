@@ -1,0 +1,6 @@
+{
+	"title": "Interactions.Rest",
+	"description": "Quick way to build Discord Slash-Command Bots on Cloudflare Workers, without having to deploy anything yourself.",
+	"role": "MAINTAINER",
+	"url": "https://interactions.rest/"
+}

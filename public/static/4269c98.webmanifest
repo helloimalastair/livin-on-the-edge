@@ -1,0 +1,19 @@
+{
+	"name": "Livin' on the Edge",
+	"short_name": "Alastair",
+	"icons": [
+		{
+			"src": "/static/f2acd10.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"src": "/static/5dad990.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		}
+	],
+	"theme_color": "#f97316",
+	"background_color": "#ffffff",
+	"display": "standalone"
+}

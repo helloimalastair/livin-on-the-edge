@@ -1,0 +1,36 @@
+---
+import { Blog as Layout } from "@/layouts";
+import { BlogPostMeta } from "@/components";
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => {
+    return { params: { slug: post.slug }, props: { post } };
+  });
+}
+
+interface Props {
+	post: CollectionEntry<"blog">;
+}
+
+const { slug } = Astro.params;
+const { post } = Astro.props;
+if (typeof slug !== "string") {
+  throw Error(`slug should be string. Received: ${slug}`);
+}
+
+const { data: frontmatter } = post;
+const { Content } = await post.render();
+---
+
+<Layout title={frontmatter.title} date={frontmatter.date}>
+  <BlogPostMeta
+    title={frontmatter.title}
+    description={frontmatter.description}
+    publishDate={frontmatter.date.toISOString()}
+    slot="meta"
+  />
+  <Content slot="main"/>
+</Layout>

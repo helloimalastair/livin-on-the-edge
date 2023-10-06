@@ -1,0 +1,40 @@
+---
+import "../styles/global.css";
+import "@fontsource/open-sans/latin-400.css";
+import "@fontsource/open-sans/latin-600.css";
+import "@fontsource/open-sans/latin-800.css";
+import { Favicon, Header, Footer, ThemeInit } from "@/components";
+Astro.response.headers.set("Content-Type", "text/html; charset=utf-8");
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <ThemeInit />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <Favicon />
+    <slot name="meta" />
+  </head>
+
+  <body class="min-h-screen max-w-3xl mx-auto px-6 sm:px-8">
+    <Header />
+    <main id="main">
+      <slot name="main"/>
+    </main>
+    <Footer />
+    <style is:global>
+      body {
+        display: grid;
+        grid-template-areas:
+          "header"
+          "main"
+          "footer";
+        grid-template-rows: 5rem minmax(0, 1fr) 5rem;
+        grid-template-columns: minmax(0, 1fr);
+      }
+      main {
+        grid-area: main;
+      }
+    </style>
+  </body>
+</html>

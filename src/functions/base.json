@@ -1,0 +1,5 @@
+{
+	"strict-transport-security": "max-age=63072000",
+	"x-content-type-options": "nosniff",
+	"x-frame-options": "DENY"
+}

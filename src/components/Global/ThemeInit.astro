@@ -1,0 +1,17 @@
+---
+// Uncompressed:
+// if (typeof window !== "undefined") {
+//   const isSystemColorSchemeDark = window.matchMedia(
+//     "(prefers-color-scheme: dark)"
+//   ).matches;
+//   const storageTheme = sessionStorage.getItem("theme");
+//   const themeColor = document.head.children.namedItem("theme-color");
+//   if (storageTheme === "dark" || (!storageTheme && isSystemColorSchemeDark)) {
+//     document.documentElement.classList.add("dark");
+//     if(themeColor) {
+//       themeColor.content = "#0e141b";
+//     }
+//   }
+// }
+---
+<script is:inline>if(typeof window<"u"){let t=window.matchMedia("(prefers-color-scheme: dark)").matches,e=sessionStorage.getItem("theme");let o=document.head.children.namedItem("theme-color");(e==="dark"||!e&&t)&&(document.documentElement.classList.add("dark"),o&&(o.content="#0e141b"))}</script>

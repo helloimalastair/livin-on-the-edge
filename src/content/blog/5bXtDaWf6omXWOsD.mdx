@@ -1,0 +1,32 @@
+---
+title: Building the (Unofficial) Cloudflare StatusMap
+date: 2022-02-17
+description: How I built a map for the Cloudflare Datacenter Statuspage, and what I learned along the way.
+---
+
+import { Astralis } from "@/components";
+import SMSC from "../images/statusmap.png";
+
+Last night, I was bored. I had a few things I needed to do, but nothing very pressing. I had been looking at the Cloudflare Statuspage because I looked into an error that someone had reported in the [CF Developers Server](https://workers.community "Cloudflare Developers Discord Server"). I was slowly scrolling through my ever-growing list of Workers Scripts on my other display when I came across one of my old hobby projects: [The PopMap](https://popmap.alastair-technologies.workers.dev/ "CF PopMap").
+
+I deployed one of my earlier projects on Workers to make it easier to serve files. I built the initial version before CF Pages went Generally-Available. It was a small project, and I scraped it together in a few hours. It would send an HTML page, which contained a Mapbox Map and a script that would pull datacenter coordinates from the [CF Speedtest](https://speed.cloudflare.com "Cloudflare Speedtest") format it nicely as a map. It worked ok, but I felt I could do better.
+
+Hence, the [StatusMap](https://statusmap.cloudflare.community). It combines the best of both worlds, with a Map view and near-real-time status indicators for every publicly listed CF data center. The best part is that it is blazing fast because it is built on Workers, with the only slow point being the Map/Point rendering process. It is available on [Github](https://github.com/Cloudflare-Community/StatusMap "Cloudflare StatusMap on Github") if any of y'all want to take a look at how it works.
+
+<Astralis src={SMSC} alt="Screen Capture from StatusMap" />
+
+Here's how it works: Static assets are served like normal through [itty-router](https://itty-router.dev "Itty Router | tiny, zero-dependency router"). For the /status route, it first checks KV to see if the current status is cached there, and if it is, it is automatically returned. If it isn't cached, the Worker begins generating an object made up of multiple **GeoJSON** _FeatureCollections_:
+
+1. The Worker pulls status data from the Statuspage API and strips off the unnecessary data, leaving only the Datacenter's IATA code, full name, and status.
+2. The Worker fetches location data from the CF Speedtest API, which contains _LatLon_ coordinates, and merges it with hard-coded _LatLon_ coordinates(needed for China because China Colos do not appear on the Speedtest API).
+3. The Statuspage Data and the Speedtest Data are merged, adding a location and status to each IATA code. The merged data is formatted as a _FeatureCollection_.
+4. Any unnecessary data in the payload is stripped away.
+5. The payload is cached in KV and is then returned to the end-user.
+
+The best part is, while all this may seem complicated and time-consuming, this whole operation takes milliseconds, and the transit time is usually the most extended segment of this entire request.
+
+What I liked about this project was how good my setup has become, thanks to the many tools I use. My editor is VSCode with IntelliSense and the [Github Copilot](https://copilot.github.com/ "GitHub Copilot - Your AI pair programmer") Extension, which, along with the first-class Typescript support in Workers, allowed me to easily see when I was missing something in a Response/Status. My build/testing pipeline consists of [esbuild](https://esbuild.github.io "esbuild - an extremely fast JavaScript bundler") & [Miniflare](https://miniflare.dev "🔥 Miniflare"), which allowed hot-reloading within a few milliseconds, which meant that when I pushed a change, the new version of the Worker would be live before I could even reload my browser tab.
+
+Lastly, I would like to thank everyone in the CF Developer Community! Y'all are so wonderful and inspire me every day, so keep up the excellent work!
+
+See y'all around!

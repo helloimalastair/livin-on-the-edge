@@ -1,0 +1,37 @@
+---
+import { getImage } from "astro:assets";
+import type { ImageOutputFormat } from "astro";
+
+type ImageContent = "image/avif" | "image/webp" | "image/png" | "image/jpeg";
+
+const VARIANTS: { format: ImageOutputFormat, type: ImageContent }[] = [
+	{ format: "avif", type: "image/avif" },
+	{ format: "webp", type: "image/webp" },
+	{ format: "png", type: "image/png" },
+];
+
+interface Props {
+	class?: string;
+	src: string;
+	alt?: string;
+}
+const { src, class: className, alt } = Astro.props;
+const sourceImage = src;
+const sources = await Promise.all(VARIANTS.map(async ({ format, type }) => {
+	const generatedImage = await getImage({ src: sourceImage, format });
+	return {
+		image: generatedImage,
+		type,
+	}
+}));
+const defaultVariant = await getImage({ src: sourceImage, format: "jpeg", quality: 16.66 });
+---
+
+<picture>
+	{
+		sources.map(({ image, type }) => (
+			<source srcset={image.src} type={type} width={image.attributes.width} height={image.attributes.height}/>
+		))
+	}
+	<img src={defaultVariant.src} alt={alt} width={defaultVariant.attributes.width} height={defaultVariant.attributes.height} class={className} />
+</picture>

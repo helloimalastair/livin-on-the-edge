@@ -1,0 +1,16 @@
+User-Agent: DuckDuckBot
+User-Agent: AppleBot
+User-Agent: GoogleBot
+User-Agent: BingBot
+User-Agent: Slurp
+User-Agent: facebot
+Allow: /
+User-Agent: AdsBot-Google-Mobile
+User-Agent: AdsBot-Google
+User-Agent: AdsBot-Google-Mobile-Apps
+User-Agent: GPTBot
+User-agent: CCBot
+User-Agent: Google-Extended
+User-Agent: *
+Disallow: /
+Sitemap: https://www.goalastair.com/sitemap.xml

@@ -1,0 +1,13 @@
+# build output
+.astro
+dist/
+
+# Runtime Stuff
+.wrangler
+.unlighthouse
+
+# dependencies
+node_modules/
+
+# macOS-specific files
+.DS_Store

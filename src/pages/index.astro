@@ -1,0 +1,30 @@
+---
+import { PageMeta } from "@/components";
+import { Base as Layout } from "@/layouts";
+import { SITE_TITLE, SITE_DESCRIPTION } from "@/config";
+---
+
+<Layout>
+  <PageMeta slot="meta" />
+  <section class="mb-8" slot="main">
+    <div class="mb-4">
+      <h1 class="font-extrabold text-5xl md:text-6xl tracking-tight pt-4 pb-2 overflow-hidden">
+        <span class="bg-gradient-to-br from-[#fb923c] via-[#f97316] to-[#ea580c] dark:from-primary-main dark:via-primary-main dark:to-primary-main bg-clip-text text-transparent">
+          {SITE_TITLE}
+        </span>
+      </h1>
+      <p class="text-2xl pb-4">{SITE_DESCRIPTION}</p>
+    </div>
+    <div>
+      <p class="mb-5">
+        Greetings! I'm Alastair, a passionate software developer with a global perspective. Hailing from the vibrant tech hub of the Bay Area, I now find myself immersed in the rich cultural heritage of Denmark, a connection I hold dear through my mother's roots. Currently, I'm pursuing a degree in Computer Science, embarking on an exciting academic journey that complements my practical experience.
+      </p>
+      <p class="mb-5">
+        My exploration in the world of code has led me to excel in languages like Typescript and delve into the powerful realm of Rust. Beyond coding, I've honed my expertise on the Cloudflare platform, finding innovative solutions to shape digital experiences.
+      </p>
+      <p class="mb-5">
+        Join me in exploring the boundless possibilities at the intersection of technology and creativity!
+      </p>
+    </div>
+  </section>
+</Layout>

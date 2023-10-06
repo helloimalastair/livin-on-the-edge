@@ -1,0 +1,46 @@
+---
+title: New Blog(again). Yay!
+date: 2023-09-06
+description: Finally finished the new blog. It only took, (checks notes), a year and change!
+---
+
+Hello everyone! **_I'm back!!!_**
+
+It's been a little while, and I haven't been nearly as prolific with my updates as I otherwise wanted to be... But hopefully this marks a turnaround!
+
+This last year has been a whirlwind for me. Moving from home, starting college, and getting used to a new country has been a lot to take in. But I'm finally starting to get settled in, and I'm ready to get back to work!
+
+This site has been in the works for a while(anyone remember [when I said it would be written in Remix?](sMThfd4vxNk5ZXsS)), but it is finally here! First, I'm gonna go through the stack:
+
+## The Stack
+
+### Framework
+
+I decided to go with [Astro](https://astro.build) for this site, instead of Remix. At the time, it was one of the front-runners when it came to edge-rendered frameworks, but now there are a lot more to choose from(SvelteKit, Nuxt, Next, etc.). After some consideration though, I realized that 99% of the content I would put on this blog would be static, so I wouldn't gain any benefit from the benefits that Remix provides.
+
+That's not to say that these other frameworks are bad, and **you** shouldn't choose them. I definitely have projects I have planned/might be working on that will use something else. This is just a case of using the right tool for the job.
+
+Astro specifically was chosen because of their focus of static-first and low-JS websites. Other than the darkmode toggle, this page should not have any JS on it. In return, it should load _pretty darn fast_.
+
+### Template
+
+This site is loosely based on [Blogster Sleek](https://github.com/flexdinesh/blogster/tree/main/templates/sleek) by [Dinesh Pandiyan](https://github.com/flexdinesh/). I say loosely because I have made a lot of changes to the template(read stripped out a lot of stuff I'm not using), making it a lot more opinionated. Appearance-wise, it shouldn't be _too_ dissimilar to the original.
+
+### Deployment
+
+This site is deployed on [Cloudflare Pages](https://pages.cloudflare.com). The previous version of the site was also deployed on Pages, and so I saw no reason to stop now.
+
+Along with the static assets that make up this site, the Pages deployment also includes a Function(piece of code) that modifies headers by content type. This ensures that every page on my site has the correct security headers, and that static assets are cached as long as possible.
+
+### Other Stuff
+
+- Image Optimization. Every image on the blog is served in multiple formats, which allows your browser to choose the optimal one.
+{/* - Built with Bun. [_Get in the oven_](https://bun.sh) */}
+
+## In other news
+
+I'm not going to make any promises about delivery schedules of new posts on here, but I will say that I have a few ideas for posts that I want to write, so hopefully I will be able to get those out soon.
+
+The site here, while a definite improvement on the old one, still isn't perfect(nothing ever is). I'm going to keep tinkering with it to get performance numbers up, and to make it more accessible. The reason I am publishing now, as it is, is because I know that if I don't, I will always find _just one more thing_ I can improve, and then never actually publish anything.
+
+See y'all around!

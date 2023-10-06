@@ -1,0 +1,1 @@
+export { OGImage } from "./OG";

@@ -1,0 +1,36 @@
+---
+import { getCollection } from "astro:content";
+import { Base as Layout } from "@/layouts";
+import { PageMeta } from "@/components";
+import { SITE_TITLE } from "@/config";
+
+const projects = await getCollection("projects");
+---
+
+<Layout>
+  <PageMeta title={`Projects | ${SITE_TITLE}`} slot="meta" />
+  <section slot="main">
+    <ul>
+      {
+        projects.map((project) => {
+          return (
+            <li class="grid grid-cols-[1fr] md:grid-cols-[1fr_auto] mb-3 md:gap-2 items-start">
+              <div class="title">
+                <a
+                  href={project.data.url}
+                  target="_blank"
+                  class="unset hover:text-text-link"
+                >
+                  <span>{project.data.title}</span>
+                </a>
+              </div>
+              <div class="text-text-muted text-sm italic pt-1">
+                {project.data.role}
+              </div>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </section>
+</Layout>

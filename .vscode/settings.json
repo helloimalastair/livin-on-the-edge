@@ -1,0 +1,26 @@
+{
+	"explorer.fileNesting.enabled": true,
+	"explorer.fileNesting.patterns": {
+		"package.json": "pnpm-lock.yaml",
+		"astro.config.ts": "tailwind.config.ts, tsconfig.json, unlighthouse.config.ts, .prettierrc, .prettierignore, .eslintrc, .eslintignore",
+		"README.md": "LICENSE"
+	},
+	"files.associations": {
+		"*.css": "tailwindcss"
+	},
+	"files.exclude": {
+		".astro": true,
+		".editorconfig": true,
+		".gitignore": true,
+		".unlighthouse": true,
+		".vscode": true,
+		".wrangler": true
+	},
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.formatOnSave": false,
+	"editor.formatOnPaste": true,
+	"editor.insertSpaces": false,
+	"editor.detectIndentation": false,
+	"editor.tabSize": 2,
+	"mdx.experimentalLanguageServer": true
+}

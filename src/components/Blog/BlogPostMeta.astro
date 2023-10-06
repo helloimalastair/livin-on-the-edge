@@ -1,0 +1,44 @@
+---
+import {
+  SITE_TITLE,
+  MY_NAME,
+} from "@/config";
+
+export interface Props {
+  title: string;
+  description: string;
+  publishDate: string;
+}
+
+const {
+  title,
+  description,
+  publishDate
+} = Astro.props;
+const pageTitle = `${title} | ${SITE_TITLE}`;
+const ogImageURL = Astro.url.toString().replace(/\/+$/g, "") + ".png"; 
+---
+
+{/* Primary Meta Tags */}
+<title>{pageTitle}</title>
+<meta name="title" content={pageTitle} />
+<meta name="description" content={description} />
+<link rel="canonical" href={Astro.url} />
+{/* Open Graph / Facebook */}
+<meta property="og:title" content={pageTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content="article" />
+<meta property="og:url" content={Astro.url} />
+<meta property="article:author" content={MY_NAME} />
+<meta property="article:published_time" content={new Date(publishDate).toISOString()} />
+<meta property="og:image" content={ogImageURL} />
+<meta property="og:image:alt" content={title} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+{/* Twitter */}
+<meta property="twitter:title" content={pageTitle} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:site" content={Astro.url} />
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content={ogImageURL} />
+<meta property="twitter:image:alt" content={title} />
