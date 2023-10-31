@@ -3,31 +3,59 @@ title: SuperSpeare - Shakespeare Quote Search
 date: 2023-09-31
 description: Over the last few weeks, Zegevlier and I built SuperSpeare, a project showing off some of Cloudflare’s latest AI technologies. You can use it to search for your favourite Shakespeare quotes.
 ---
+
 import { Aside, Astralis } from "@/components";
 import Shakes from "../images/toocoolforshakespeareschool.png";
 
-*This article was cowritten by Zegevlier and I. Go check out his blog post [here](https://zegs.me/posts/superspeare/), and tell him Alastair sent you! ;)*
+_This article was cowritten by Zegevlier and I. [Go check out his blog post](https://zegs.me/posts/superspeare/) here, and tell him Alastair sent you! ;)_
 
 <Astralis src={Shakes} alt="Shakespeare with Sunglasses" />
-Over the last few weeks, Zegevlier and I built [*SuperSpeare*](https://superspeare.cloudflare.community/), a project showing off some of Cloudflare’s latest AI technologies. You can use it to search for your favourite Shakespeare quotes. Ever wondered where the famous quote “*What you egg? [he stabs him]*” comes from? Now you can find out! It uses a vector database to search through text embeddings of Shakespeare’s plays to find the closest matches for your query. If you click one of the results, it takes you to that quote in the text where you can read the context.
+Over the last few weeks, Zegevlier and I built [*SuperSpeare*](https://superspeare.cloudflare.community/),
+a project showing off some of Cloudflare’s latest AI technologies. You can use it
+to search for your favourite Shakespeare quotes. Ever wondered where the famous quote
+“*What you egg? [he stabs him]*” comes from? Now you can find out! It uses a vector
+database to search through text embeddings of Shakespeare’s plays to find the closest
+matches for your query. If you click one of the results, it takes you to that quote
+in the text where you can read the context.
 <Aside title="Affiliation Notice" wide={true}>
 	<p class="text-sm">
-		Neither of us is employed by Cloudflare, but we are part of the Community Champions program. This means we have free access to several Cloudflare products, including all used in this project. Cloudflare does not have editorial control over this blog post.
+		Neither of us is employed by Cloudflare, but we are part of the Community
+		Champions program. This means we have free access to several Cloudflare
+		products, including all used in this project. Cloudflare does not have
+		editorial control over this blog post.
 	</p>
 </Aside>
-## How it works
-There were three important components that needed to work in this project. We needed the data in a format we could query, we needed to be able to search it from the frontend, and we needed the frontend itself.
-## Importing the data
-We got the Shakespeare plays we used in this project from the [Folger Shakespeare Library](https://www.folger.edu/). The licence of their translations is very permissive. We downloaded the TXT versions and then ran them through the importing script we made. It would remove character names, act and scene designations, and the intro. After this, we were left with (mostly) just the text and scene directions. Then, we split the text up into lines and fed those, in batches, into a Cloudflare Worker we had set up that would calculate the text embedding for the sentence. This uses the new [Workers AI](https://developers.cloudflare.com/workers-ai/) platform to run `@cf/baai/bge-base-en-v1.5`(based on BAAI’s [FlagEmbedding](https://huggingface.co/BAAI/bge-base-en-v1.5) Model). This worker then stores this vector, along with the line number and work the sentence is from and the sentence itself, into [Vectorize](https://developers.cloudflare.com/vectorize/). Vectorize is Cloudflare’s new [vector database](https://developers.cloudflare.com/vectorize/learning/what-is-a-vector-database/). Finally, we upload the entire play into [R2](https://developers.cloudflare.com/r2) so we can download it on the frontend.
-## Querying the data
-Now we have this data in Vectorize, we need some way to query it. This is where the aptly-named query worker comes in. This worker takes the search query, generates the embeddings for it (again, using Workers AI), and searches Vectorize for the 10 most similar vectors. We then bundle the resultant data from the vectors (this currently requires some [ugly code](https://github.com/Cloudflare-Community/superspeare/blob/a7c03f02b14eb41dde36a67d748a6d3a616f47c5/query-worker/src/index.ts#L54), but which should be better :soonTM:), which includes the line number and work that the text comes from, and send those to the user.
-## The Frontend
-Finally, the frontend is hosted on [Pages](https://pages.cloudflare.com/) and made using [SvelteKit](https://kit.svelte.dev/). After some experimentation, we found that it looked best when it was all on a single page like it is now. We added some comfort features, such as mobile support, and hid some easter eggs throughout the site.
-## Future improvements
-If we ever come back to this project, we might add the following features:
-- Include the scene and act in the search results
-- Use the XML format of the texts to provide some better formatting
-- Clean up the data a bit better to prevent single-character lines
-- Split up the data in smarter ways. Currently, it just splits per line, but this might not be the most efficient.
-## Closing thoughts
-We had fun making this. Being able to run this stuff fully serverless is really powerful, and we’re excited to see where it goes! [Give it a try yourself](https://superspeare.cloudflare.community) and check out the source code [on Github](https://github.com/cloudflare-community/superspeare).
+## How it works There were three important components that needed to work in this
+project. We needed the data in a format we could query, we needed to be able to search
+it from the frontend, and we needed the frontend itself. ## Importing the data We
+got the Shakespeare plays we used in this project from the [Folger Shakespeare Library](https://www.folger.edu/).
+The licence of their translations is very permissive. We downloaded the TXT versions
+and then ran them through the importing script we made. It would remove character
+names, act and scene designations, and the intro. After this, we were left with (mostly)
+just the text and scene directions. Then, we split the text up into lines and fed
+those, in batches, into a Cloudflare Worker we had set up that would calculate the
+text embedding for the sentence. This uses the new [Workers AI](https://developers.cloudflare.com/workers-ai/)
+platform to run `@cf/baai/bge-base-en-v1.5`(based on BAAI’s [FlagEmbedding](https://huggingface.co/BAAI/bge-base-en-v1.5)
+Model). This worker then stores this vector, along with the line number and work
+the sentence is from and the sentence itself, into [Vectorize](https://developers.cloudflare.com/vectorize/).
+Vectorize is Cloudflare’s new [vector database](https://developers.cloudflare.com/vectorize/learning/what-is-a-vector-database/).
+Finally, we upload the entire play into [R2](https://developers.cloudflare.com/r2)
+so we can download it on the frontend. ## Querying the data Now we have this data
+in Vectorize, we need some way to query it. This is where the aptly-named query worker
+comes in. This worker takes the search query, generates the embeddings for it (again,
+using Workers AI), and searches Vectorize for the 10 most similar vectors. We then
+bundle the resultant data from the vectors (this currently requires some [ugly code](https://github.com/Cloudflare-Community/superspeare/blob/a7c03f02b14eb41dde36a67d748a6d3a616f47c5/query-worker/src/index.ts#L54),
+but which should be better :soonTM:), which includes the line number and work that
+the text comes from, and send those to the user. ## The Frontend Finally, the frontend
+is hosted on [Pages](https://pages.cloudflare.com/) and made using [SvelteKit](https://kit.svelte.dev/).
+After some experimentation, we found that it looked best when it was all on a single
+page like it is now. We added some comfort features, such as mobile support, and
+hid some easter eggs throughout the site. ## Future improvements If we ever come
+back to this project, we might add the following features: - Include the scene and
+act in the search results - Use the XML format of the texts to provide some better
+formatting - Clean up the data a bit better to prevent single-character lines - Split
+up the data in smarter ways. Currently, it just splits per line, but this might not
+be the most efficient. ## Closing thoughts We had fun making this. Being able to
+run this stuff fully serverless is really powerful, and we’re excited to see where
+it goes! [Give it a try yourself](https://superspeare.cloudflare.community) and check
+out the source code [on Github](https://github.com/cloudflare-community/superspeare).

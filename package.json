@@ -7,7 +7,7 @@
 		"lint": "eslint \"src/**/*.ts*\"",
 		"format": "prettier --write .",
 		"clean": "rm -rf dist .wrangler .unlighthouse",
-		"deploy": "rm -rf dist/_worker.js && wrangler pages deploy",
+		"deploy": "rm -rf dist/_worker.js && wrangler pages deploy dist",
 		"pages:dev": "rm -rf dist/_headers && wrangler pages dev --compatibility-date=2023-09-22 dist"
 	},
 	"dependencies": {
