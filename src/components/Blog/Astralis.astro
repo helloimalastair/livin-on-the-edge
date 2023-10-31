@@ -1,37 +1,13 @@
 ---
-import { getImage } from "astro:assets";
-import type { ImageOutputFormat } from "astro";
-
-type ImageContent = "image/avif" | "image/webp" | "image/png" | "image/jpeg";
-
-const VARIANTS: { format: ImageOutputFormat, type: ImageContent }[] = [
-	{ format: "avif", type: "image/avif" },
-	{ format: "webp", type: "image/webp" },
-	{ format: "png", type: "image/png" },
-];
-
+import { Picture } from "astro:assets";
+import type { ImageMetadata } from "astro";
 interface Props {
-	class?: string;
-	src: string;
-	alt?: string;
+	src: ImageMetadata,
+	alt: string
 }
-const { src, class: className, alt } = Astro.props;
-const sourceImage = src;
-const sources = await Promise.all(VARIANTS.map(async ({ format, type }) => {
-	const generatedImage = await getImage({ src: sourceImage, format });
-	return {
-		image: generatedImage,
-		type,
-	}
-}));
-const defaultVariant = await getImage({ src: sourceImage, format: "jpeg", quality: 16.66 });
+const { src, alt } = Astro.props;
 ---
-
-<picture>
-	{
-		sources.map(({ image, type }) => (
-			<source srcset={image.src} type={type} width={image.attributes.width} height={image.attributes.height}/>
-		))
-	}
-	<img src={defaultVariant.src} alt={alt} width={defaultVariant.attributes.width} height={defaultVariant.attributes.height} class={className} />
-</picture>
+<div class="flex flex-col items-center">
+	<Picture {src} class="m-0" formats={["avif", "webp", "png"]} densities={[1, 2, 3]} {alt} />
+	<p class="text-sm">{alt}</p>
+</div>

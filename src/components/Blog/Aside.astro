@@ -1,10 +1,11 @@
 ---
 interface Props {
 	title: string;
+	wide?: boolean;
 }
-const { title } = Astro.props;
+const { title, wide } = Astro.props;
 ---
-<aside class="bg-white/10 w-1/2 px-4 py-1 border-l-2 border-l-yellow-400">
+<aside class=`bg-white/10 ${ wide ? "w-full" : "w-1/2" } px-4 py-1 border-l-2 border-l-yellow-400`>
 	<h2 class="my-3 text-xl">{title}</h2>
   <slot />
 </aside>
